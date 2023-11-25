@@ -1,0 +1,33 @@
+﻿@page "/prueba"
+<h3>Selección Múltiple con InputSelect</h3>
+
+<div class="form-group">
+    <label for="selectedOptions">Selecciona opciones:</label>
+    <InputSelect id="selectedOptions" @bind-Value="selectedOptions" multiple="true">
+        @foreach (var option in options)
+        {
+            <option value="@option">@option</option>
+        }
+    </InputSelect>
+</div>
+
+<div>
+    <p>Selecciones realizadas:</p>
+    <ul>
+        @foreach (var selectedOption in selectedOptions)
+        {
+            <li>@selectedOption</li>
+        }
+    </ul>
+</div>
+
+@code {
+    string[] options = { "Opción 1", "Opción 2", "Opción 3", "Opción 4" };
+    string[] selectedOptions = new string[0];
+
+    // Evento de cambio en la selección
+    private void SelectionChanged(ChangeEventArgs e)
+    {
+        selectedOptions = ((string[])e.Value) ?? new string[0];
+    }
+}
